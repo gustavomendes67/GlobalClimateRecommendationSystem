@@ -29,3 +29,7 @@ def obter_cidades():
             print(f'Erro ao buscar cidade: {cidade}')
 
     return dados_cidades
+
+# Dev 2 (Classificador): Cria as condicionais complexas para os "Status de Viagem".
+
+#Dev 3 (Relatórios): Cuida da formatação do arquivo de saída e design do gráfico.
