@@ -1,3 +1,5 @@
+# Dev 1 (Geolocalização) - Trata a entrada de nomes de cidades e busca as coordenadas/clima.)
+
 import requests
 
 API_KEY = '8e882ea9fbb3b97bbe17f1c764f79674'
