@@ -32,4 +32,16 @@ def obter_cidades():
 
 # Dev 2 (Classificador): Cria as condicionais complexas para os "Status de Viagem".
 
+def classificador_cidade(temp, chuva_mm, condicao):
+    condicao = condicao.lower()
+
+    if chuva_mm > 10 or "tempestade" in condicao:
+        return "alerta: de chuva forte"
+    elif temp <= 5 or "neve" in condicao:
+        return "ideal para neve"
+    elif 22 <= temp <= 35 and chuva_mm < 5:
+        return "ideal para praia"
+    else:
+        return "clima agradável"
+
 #Dev 3 (Relatórios): Cuida da formatação do arquivo de saída e design do gráfico.
