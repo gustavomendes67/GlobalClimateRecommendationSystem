@@ -50,3 +50,11 @@ for d in obter_cidades():
     d["classificacao"] = classificar(d)
 
 #Dev 3 (Relatórios): Cuida da formatação do arquivo de saída e design do gráfico.
+def gerar_relatorio_txt(dados_finais):
+    with open('relatorio_viagem.txt', 'w') as f:
+        f.write("---RELATÓRIO DE VIAGENS MUNDIAIS---\n")
+        f.write("-"*35+"\n")
+        for item in dados_finais:
+            f.write(f"cidade: {item['cidade']:<17} |TEMP: {item['temp']}°C" 
+                    f"|STATUS: "f""f"{item['status']}\n")
+            print("✓Arquivo 'relatorio_viagem.txt' gerado com sucesso!")
