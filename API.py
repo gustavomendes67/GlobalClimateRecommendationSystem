@@ -2,6 +2,7 @@
 
 import requests
 
+
 API_KEY = '8e882ea9fbb3b97bbe17f1c764f79674'
 
 def obter_clima(cidade):
@@ -32,16 +33,20 @@ def obter_cidades():
 
 # Dev 2 (Classificador): Cria as condicionais complexas para os "Status de Viagem".
 
-def classificador_cidade(temp, chuva_mm, condicao):
-    condicao = condicao.lower()
+def classificar(dado):
+    temp = dado["temperatura"]
+    clima = dado["clima"]
 
-    if chuva_mm > 10 or "tempestade" in condicao:
-        return "alerta: de chuva forte"
-    elif temp <= 5 or "neve" in condicao:
-        return "ideal para neve"
-    elif 22 <= temp <= 35 and chuva_mm < 5:
-        return "ideal para praia"
+    if "chuva" in clima.lower():
+        return "Alerta: Chuva Forte"
+    elif temp >= 25:
+        return "Ideal para praia"
+    elif temp <= 10:
+        return "Ideal para neve"
     else:
         return "clima agradável"
+
+for d in obter_cidades():
+    d["classificacao"] = classificar(d)
 
 #Dev 3 (Relatórios): Cuida da formatação do arquivo de saída e design do gráfico.
