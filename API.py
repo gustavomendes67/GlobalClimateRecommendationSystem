@@ -2,7 +2,6 @@
 
 import requests
 
-
 API_KEY = '8e882ea9fbb3b97bbe17f1c764f79674'
 
 def obter_clima(cidade):
@@ -26,6 +25,7 @@ def obter_cidades():
         if len(cidades) == 5:
             break
         print("Você não digitou exatamente 5 cidades.")
+
     dados_cidades = []
 
     for cidade in cidades:
