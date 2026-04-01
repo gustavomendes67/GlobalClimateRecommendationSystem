@@ -58,3 +58,7 @@ def gerar_relatorio_txt(dados_finais):
             f.write(f"cidade: {item['cidade']:<17} |TEMP: {item['temp']}°C" 
                     f"|STATUS: "f""f"{item['status']}\n")
             print("✓Arquivo 'relatorio_viagem.txt' gerado com sucesso!")
+def gerar_grafico_barras(dados_finais):
+
+
+
