@@ -11,6 +11,9 @@ def obter_clima(cidade):
     resposta = requests.get(url)
     dados = resposta.json()
 
+    if dados.get('cod') != 200:
+        raise ValueError(f'Cidade não encontrada: {cidade}')
+
     return {
         'cidade': cidade,
         'temperatura': dados['main']['temp'],
@@ -18,16 +21,19 @@ def obter_clima(cidade):
     }
 
 def obter_cidades():
-    cidades = input('Digite 5 cidades separadas por vírgula: ').strip().split(',')
-
+    while True:
+        cidades = input('Digite 5 cidades separadas por vírgula: ').strip().split(',')
+        if len(cidades) == 5:
+            break
+        print("Você não digitou exatamente 5 cidades.")
     dados_cidades = []
 
     for cidade in cidades:
         try:
             dados = obter_clima(cidade.strip())
             dados_cidades.append(dados)
-        except:
-            print(f'Erro ao buscar cidade: {cidade}')
+        except Exception as e:
+            print(f'Erro ao buscar cidade: {cidade} -> {e}')
 
     return dados_cidades
 
@@ -46,21 +52,19 @@ def classificar(dado):
     else:
         return "clima agradável"
 
-for d in obter_cidades():
+dados = obter_cidades()
+
+for d in dados:
     d["classificacao"] = classificar(d)
 
-#Dev 3 (Relatórios): Cuida da formatação do arquivo de saída e design do gráfico.
+# Dev 3 e 4 (Relatórios): Cuida da formatação do arquivo de saída e design do gráfico.
 
-def gerar_relatorio_txt(dados_finais):
+def gerar_relatorio_txt(dados):
     with open('relatorio_viagem.txt', 'w') as f:
         f.write("---RELATÓRIO DE VIAGENS MUNDIAIS---\n")
         f.write("-"*35+"\n")
-        for item in dados_finais:
-            f.write(f"cidade: {item['cidade']:<17} |TEMP: {item['temp']}°C" 
-                    f"|STATUS: "f""f"{item['status']}\n")
-            print("✓Arquivo 'relatorio_viagem.txt' gerado com sucesso!")
+        for item in dados:
+            f.write(f"cidade: {item['cidade']:<17} | TEMP: {item['temperatura']}°C | STATUS: {item['classificacao']}\n")
+        print("✓Arquivo 'relatorio_viagem.txt' gerado com sucesso!")
 
-def gerar_grafico_barras(dados_finais):
-    cidades=[c['cidade'] for c in dados_finais]
-    temperatura=[c['temp']for c in dados_finais]
-
+# Dev 4: Gráfico de Barras
