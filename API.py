@@ -87,5 +87,6 @@ def gerar_grafico_barras(dados):
     print("✓Gerando gráfico...")
     plt.show()
 
+
 gerar_relatorio_txt(dados)
 gerar_grafico_barras(dados)
