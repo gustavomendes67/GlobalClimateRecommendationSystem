@@ -1,6 +1,7 @@
 # Dev 1 (Geolocalização) - Trata a entrada de nomes de cidades e busca as coordenadas/clima.)
 
 import requests
+from matplotlib import pyplot as plt
 
 API_KEY = '8e882ea9fbb3b97bbe17f1c764f79674'
 
@@ -68,3 +69,23 @@ def gerar_relatorio_txt(dados):
         print("✓Arquivo 'relatorio_viagem.txt' gerado com sucesso!")
 
 # Dev 4: Gráfico de Barras
+
+def gerar_grafico_barras(dados):
+    cidades = [c["cidade"] for c in dados]
+    temperaturas = [c["temperatura"] for c in dados]
+
+    plt.figure(figsize=(10,6))
+    cores = ['skyblue' if t> 25 else 'skyblue' for t in temperaturas]
+
+    plt.bar(cidades, temperaturas,color=cores)
+    plt.axhline(0, color='black', linestyle='-')
+    plt.title('Comparativo de Temperaturas das Cidades')
+    plt.xlabel('Cidade')
+    plt.ylabel('Temperatura Atual(°C)')
+    plt.grid(axis='y', linestyle='--',alpha=0.7)
+
+    print("✓Gerando gráfico...")
+    plt.show()
+
+gerar_relatorio_txt(dados)
+gerar_grafico_barras(dados)
