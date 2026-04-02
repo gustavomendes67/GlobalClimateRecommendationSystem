@@ -1,5 +1,5 @@
 # Dev 1 (Geolocalização) - Trata a entrada de nomes de cidades e busca as coordenadas/clima.)
-
+import numpy as np
 import requests
 from matplotlib import pyplot as plt
 
@@ -83,10 +83,15 @@ def gerar_grafico_barras(dados):
     plt.xlabel('Cidade')
     plt.ylabel('Temperatura Atual(°C)')
     plt.grid(axis='y', linestyle='--',alpha=0.7)
+    for c in dados:
+        cidadesd = cidades
+        temperaturasd = temperaturas
+        fig, ax = plt.subplots()
+        temps = ax.bar(cidadesd, temperaturasd)
+        ax.bar_label(temps,label_type='center',color='black')
 
     print("✓Gerando gráfico...")
     plt.show()
-
 
 gerar_relatorio_txt(dados)
 gerar_grafico_barras(dados)
